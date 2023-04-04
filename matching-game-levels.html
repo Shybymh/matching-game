@@ -2,16 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
-        <title>Matching Game</title>
+        <title>Pick the extra Leaf</title>
         <style>
+            
             h1{
                 color: honeydew;
                 background-image: url("images2/head.png");
                 text-align: center;
                 font-size: 50px;
             }
-            p{
-                color: rgba(192, 11, 11, 0.932);
+            h3{
+                color: rgba(239, 232, 232, 0.932);
+                background-color:rgb(255, 170, 0.5);
                 font-size: 30px;
                 text-align: center;
             }
@@ -58,9 +60,10 @@
             }
         </style>
     </head>
-    <body onload="selectLevel()">    
-        <h1>Matching Game</h1>
-        <p>Click on the extra leaf on the left.</p>
+    <body onload="selectLevel()">  
+        
+        <h1>Pick the extra Leaf</h1>
+        <h3>Click the extra leaf on the left</h3>
         
         <button id="startButton" onclick="startGame()">Restart</button>
         
@@ -70,6 +73,7 @@
             <option value="5">Medium</option>
             <option value="8">Difficult</option>
         </select>
+   
         
         <div id="leftSide"></div>
         <div id="rightSide"></div>
