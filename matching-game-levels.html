@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Matching Game</title>
+        <style>
+            h1{
+                color: honeydew;
+                background-image: url("images2/head.png");
+                text-align: center;
+                font-size: 50px;
+            }
+            p{
+                color: rgba(192, 11, 11, 0.932);
+                font-size: 30px;
+                text-align: center;
+            }
+            body{
+                background-image: url("images2/grass.png");
+            }
+            img {
+                position: absolute;
+            }
+            
+            div {
+                position: absolute;
+                left: 100px;
+                width: 500px;
+                height: 70%;
+            }
+            #rightSide {
+                
+                left: 700px;
+                border-left: 1px solid;
+            }
+            button{
+                
+                background-color: orangered;
+                color: lavender;
+                width: 100px;
+                height: 35px;
+                border-radius: 15px;
+                font-size: 20px;
+            }
+            #startButton {
+                display: none;
+            }
+            #level{
+                position: absolute;
+                
+                background-color: orangered;
+                color: cornsilk;
+                width: 100px;
+                height: 35px;
+                border-radius: 15px;
+                font-size: 20px;
+
+            }
+        </style>
+    </head>
+    <body onload="selectLevel()">    
+        <h1>Matching Game</h1>
+        <p>Click on the extra leaf on the left.</p>
+        
+        <button id="startButton" onclick="startGame()">Restart</button>
+        
+        <select id="level" name="level" onChange="selectLevel()">
+            <option value="">Level</option>
+            <option value="3">Easy</option>
+            <option value="5">Medium</option>
+            <option value="8">Difficult</option>
+        </select>
+        
+        <div id="leftSide"></div>
+        <div id="rightSide"></div>
+
+        <script>
+             
+            let numberOfLeaves = 0;
+            let level = 0;
+            
+            const theLeftSide = document.getElementById('leftSide'); 
+            const theRightSide = document.getElementById('rightSide');
+            let numTries = 0;
+            
+                
+
+            function selectLevel() {
+                level = Number(document.getElementById("level").value);
+                
+                if (level === 3 || level ===  5 || level === 8) {
+
+                    numberOfLeaves = level;
+                    generateLeaves();
+                    document.getElementById("level").style.display = "none";
+                }
+            }
+
+
+            
+            function generateLeaves() {
+                
+                
+
+                for( i=0 ; i < numberOfLeaves ;i++ ) {
+                    
+
+                    const leaves = ["images2/leaf0.png", "images2/leaf1.png", "images2/leaf3.png","images2/leaf5.png", "images2/leaf6.png", "images2/leaf7.png",
+                                    "images2/leaf11.png", "images2/leaf12.png"];
+                    
+                    
+                    let randomleafIdx = Math.floor(Math.random() * 5);
+                    const leaf = document.createElement('img');
+                    leaf.src = leaves[randomleafIdx];
+                    
+                    let randomTop = Math.floor(Math.random() * 400)  + 1;
+                    let randomLeft = Math.floor(Math.random() * 400) + 1;
+                    leaf.style.top = randomTop + 'px' ;
+                    leaf.style.left = randomLeft + 'px' ;
+                    
+                    theLeftSide.appendChild(leaf);
+                    
+      
+                }
+                
+                const leftSideImages = theLeftSide.cloneNode(true);
+                leftSideImages.removeChild(leftSideImages.lastChild);
+                theRightSide.appendChild(leftSideImages);
+                theLeftSide.addEventListener('click',gameOver);
+                theRightSide.addEventListener('click',gameOver);
+                theLeftSide.lastChild.addEventListener('click',nextLevel);
+                numTries++ ;   
+                
+                
+            }
+
+            function nextLevel() {
+                
+
+                event.stopPropagation();
+                
+                while (theLeftSide.firstChild){
+                    theLeftSide.removeChild(theLeftSide.firstChild);
+                }
+                while (theRightSide.firstChild){
+                    theRightSide.removeChild(theRightSide.firstChild);
+                }
+                numberOfLeaves += level;
+                generateLeaves();
+            }
+
+            function gameOver() {
+                numTries -=1;
+                alert('Game Over!\n\n You got it right ' + numTries + ' times!');
+                
+                theLeftSide.lastChild.removeEventListener('click',nextLevel);
+                while (theLeftSide.firstChild){
+                    theLeftSide.removeChild(theLeftSide.firstChild);
+                }
+                while (theRightSide.firstChild){
+                    theRightSide.removeChild(theRightSide.firstChild);
+                }
+                
+                document.getElementById("startButton").style.display = "block";
+                document.body.removeEventListener('click',gameOver);
+
+                
+                
+            }
+
+            function startGame() {
+                numberOfLeaves = 0;
+                numTries = 0;
+                document.getElementById("startButton").style.display = "none";
+                document.getElementById("level").style.display = "block";
+                document.getElementById("level").options[0].selected = true;
+            }
+
+        </script>
+
+    </body>
+</html>
