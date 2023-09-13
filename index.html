@@ -4,79 +4,176 @@
         <meta charset="utf-8"/>
         <title>Pick the extra Leaf</title>
         <style>
-            
-            h1{
-                color: honeydew;
-                background-image: url("images2/head.png");
-                text-align: center;
-                font-size: 50px;
-            }
-            h3{
-                color: rgba(239, 232, 232, 0.932);
-                background-color:rgb(255, 170, 0.5);
-                font-size: 30px;
-                text-align: center;
-            }
+
             body{
                 background-image: url("images2/grass.png");
+                margin: 0px;
             }
+            #topBanner{
+                background-image: url("images2/head.png");
+            }
+            h1{
+                color: rgb(106, 244, 106);
+               
+                text-align: center;
+                font-size: 50px;
+                margin-top: 0%;
+                padding-top: 0%;
+                height: 100px;
+            }
+            h2{
+                
+                color: rgba(73, 80, 211, 0.932);
+                /* background-color:rgb(255, 170, 0.5); */
+                font-size: 30px;
+                text-align: center;
+                height: 75px;
+                margin-bottom: 0px;
+            }
+           
             img {
                 position: absolute;
             }
             
-            div {
+            #leftSide,#rightSide{
+                
+                background-image: url("images2/grass.png");
                 position: absolute;
+                /*top: 150px;
                 left: 100px;
-                width: 500px;
+                width: 500px; */
+                width: 50%;
                 height: 70%;
+                
+                display: flex;
             }
             #rightSide {
-                
-                left: 700px;
+               
+                /* left: 700px;  */
+                left: 50%;
                 border-left: 1px solid;
+                margin-right: 10px;
             }
-            button{
-                
+            #buttons{
+                position: absolute;
+                top: 75px;
+                left: 575px;
                 background-color: orangered;
                 color: lavender;
-                width: 100px;
-                height: 35px;
+                width: 150px;
+                height: 50px;
                 border-radius: 15px;
                 font-size: 20px;
+                
             }
-            #startButton {
+            /* #startButton {
                 display: none;
-            }
+                
+            } */
+
+            /* #buttons{
+                position: absolute;
+                top: 10px;
+                left: 100px;
+            } */
             #level{
                 position: absolute;
-                
+                left: 200px;
                 background-color: orangered;
                 color: cornsilk;
                 width: 100px;
-                height: 35px;
+                height: 50px;
                 border-radius: 15px;
                 font-size: 20px;
 
+            
             }
+
+
+            /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; 
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+ border: 5px solid #62d312d6;
+ margin: 15% auto;
+    padding: 20px;
+    width: 50%;
+    height: 50%;
+}
+
+/* The Close Button */
+.close {
+  color: #d81313;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
         </style>
     </head>
     <body onload="selectLevel()">  
+        <div id="topBanner">
         
-        <h1>Pick the extra Leaf</h1>
-        <h3>Click the extra leaf on the left</h3>
+            <h1>Pick a Leaf</h1>
+            
+            <div id="buttons">
+                <button id="startButton" onclick="startGame()">Start Game</button>
+                <select id="level" name="level" onChange="selectLevel()">
+                    <option value="">Level</option>
+                    <option value="3">Easy</option>
+                    <option value="5">Medium</option>
+                    <option value="8">Difficult</option>
+                </select>
+            </div>
+    
+            <h2 >Click the extra leaf on the left</h2>
+
+        </div>
+        <!-- <h2 id="gameDone">Oops! Game Over!</h2> -->
         
-        <button id="startButton" onclick="startGame()">Restart</button>
-        
-        <select id="level" name="level" onChange="selectLevel()">
-            <option value="">Level</option>
-            <option value="3">Easy</option>
-            <option value="5">Medium</option>
-            <option value="8">Difficult</option>
-        </select>
+    
    
+       
+            <div id="leftSide"></div>
+            <div id="rightSide"></div>
+       
+
+            <!-- Trigger/Open The Modal -->
+<!-- <button id="myBtn">Open Modal</button> -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Game Over</h1>
+    
+  </div>
+
+</div>
+
+
+
         
-        <div id="leftSide"></div>
-        <div id="rightSide"></div>
 
         <script>
              
@@ -90,6 +187,7 @@
                 
 
             function selectLevel() {
+                
                 level = Number(document.getElementById("level").value);
                 
                 if (level === 3 || level ===  5 || level === 8) {
@@ -97,6 +195,9 @@
                     numberOfLeaves = level;
                     generateLeaves();
                     document.getElementById("level").style.display = "none";
+
+                    document.getElementById("begin").style.display = "block";
+                   
                 }
             }
 
@@ -113,7 +214,7 @@
                                     "images2/leaf11.png", "images2/leaf12.png"];
                     
                     
-                    let randomleafIdx = Math.floor(Math.random() * 5);
+                    let randomleafIdx = Math.floor(Math.random() * 8);
                     const leaf = document.createElement('img');
                     leaf.src = leaves[randomleafIdx];
                     
@@ -123,15 +224,18 @@
                     leaf.style.left = randomLeft + 'px' ;
                     
                     theLeftSide.appendChild(leaf);
+                    //theRightSide.appendChild(leaf);
                     
       
                 }
                 
                 const leftSideImages = theLeftSide.cloneNode(true);
                 leftSideImages.removeChild(leftSideImages.lastChild);
+                
                 theRightSide.appendChild(leftSideImages);
-                theLeftSide.addEventListener('click',gameOver);
-                theRightSide.addEventListener('click',gameOver);
+                // theLeftSide.addEventListener('click',gameOver);
+                // theRightSide.addEventListener('click',gameOver);
+                theLeftSide.addEventListener('click', gameOver);
                 theLeftSide.lastChild.addEventListener('click',nextLevel);
                 numTries++ ;   
                 
@@ -155,7 +259,39 @@
 
             function gameOver() {
                 numTries -=1;
-                alert('Game Over!\n\n You got it right ' + numTries + ' times!');
+
+                
+
+                // document.getElementById("begin").style.display = "none";
+
+                 // Get the modal
+                let modal = document.getElementById("myModal");
+
+                // Get the button that opens the modal
+                // let btn = document.getElementById("myBtn");
+
+                // Get the <span> element that closes the modal
+                let span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks the button, open the modal 
+                // btn.onclick = modaldisplay() {
+                modal.style.display = "block";
+                // }
+                // document.getElementById("startButton").style.display = "block";
+
+                // When the user clicks on <span> (x), close the modal
+
+                    
+
+                   
+                    
+                span.onclick = function() {
+                modal.style.display = "none";
+                
+               
+                }    
+
+                //alert('Game Over!\n\n You got it right ' + numTries + ' times!');
                 
                 theLeftSide.lastChild.removeEventListener('click',nextLevel);
                 while (theLeftSide.firstChild){
@@ -164,21 +300,28 @@
                 while (theRightSide.firstChild){
                     theRightSide.removeChild(theRightSide.firstChild);
                 }
-                
                 document.getElementById("startButton").style.display = "block";
                 document.body.removeEventListener('click',gameOver);
+                
+               
 
-                
-                
             }
 
             function startGame() {
+                
                 numberOfLeaves = 0;
                 numTries = 0;
+
                 document.getElementById("startButton").style.display = "none";
                 document.getElementById("level").style.display = "block";
                 document.getElementById("level").options[0].selected = true;
+
+                generateLeaves();
             }
+
+           
+
+
 
         </script>
 
