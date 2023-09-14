@@ -6,11 +6,13 @@
         <style>
 
             body{
-                background-image: url("images2/grass.png");
+                /* background-image: url("images2/grass.png"); */
+                background-color: #000;
                 margin: 0px;
             }
             #topBanner{
                 background-image: url("images2/head.png");
+                
             }
             h1{
                 color: rgb(106, 244, 106);
@@ -54,7 +56,7 @@
                 border-left: 1px solid;
                 margin-right: 10px;
             }
-            #buttons{
+            /* #buttons{
                 position: absolute;
                 top: 75px;
                 left: 575px;
@@ -65,7 +67,7 @@
                 border-radius: 15px;
                 font-size: 20px;
                 
-            }
+            } */
             /* #startButton {
                 display: none;
                 
@@ -76,17 +78,22 @@
                 top: 10px;
                 left: 100px;
             } */
-            #level{
+            #level,#startButton{
                 position: absolute;
-                left: 200px;
-                background-color: orangered;
+                left: 100px;
+                background-color: rgba(200, 59, 7, 0.954);
                 color: cornsilk;
-                width: 100px;
+                width: 150px;
                 height: 50px;
                 border-radius: 15px;
                 font-size: 20px;
 
             
+            }
+            #basket{
+                position: absolute;
+                left: 900px;
+                top: 20px;
             }
 
 
@@ -106,7 +113,8 @@
 
 /* Modal Content */
 .modal-content {
- border: 5px solid #62d312d6;
+ border: 5px solid #2d5312d6;
+ background-color: rgb(24, 52, 17);
  margin: 15% auto;
     padding: 20px;
     width: 50%;
@@ -134,8 +142,9 @@
         
             <h1>Pick a Leaf</h1>
             
+            
             <div id="buttons">
-                <button id="startButton" onclick="startGame()">Start Game</button>
+                <button id="startButton" onclick="startGame()">Restart Game</button>
                 <select id="level" name="level" onChange="selectLevel()">
                     <option value="">Level</option>
                     <option value="3">Easy</option>
@@ -143,8 +152,9 @@
                     <option value="8">Difficult</option>
                 </select>
             </div>
-    
             <h2 >Click the extra leaf on the left</h2>
+           
+            <!-- <img src="images2/basket.png" alt="basket" id="basket" width="300px" height="200px"/> -->
 
         </div>
         <!-- <h2 id="gameDone">Oops! Game Over!</h2> -->
@@ -166,6 +176,11 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <h1>Game Over</h1>
+    <div>
+        <h2>Your score is: </h2>
+        <h2 id="score"></h2>
+        
+    </div>
     
   </div>
 
@@ -289,8 +304,11 @@
                 modal.style.display = "none";
                 
                
-                }    
+                }  
 
+                let score = numTries * 10
+
+                document.getElementById('score').innerText = score
                 //alert('Game Over!\n\n You got it right ' + numTries + ' times!');
                 
                 theLeftSide.lastChild.removeEventListener('click',nextLevel);
