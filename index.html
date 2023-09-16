@@ -7,8 +7,9 @@
 
             body{
                 /* background-image: url("images2/grass.png"); */
-                background-color: #000;
+                background-color: rgb(163, 71, 17);
                 margin: 0px;
+                
             }
             #topBanner{
                 background-image: url("images2/head.png");
@@ -25,7 +26,7 @@
             }
             h2{
                 
-                color: rgba(73, 80, 211, 0.932);
+                color: rgba(243, 227, 12, 0.712);
                 /* background-color:rgb(255, 170, 0.5); */
                 font-size: 30px;
                 text-align: center;
@@ -44,17 +45,20 @@
                 /*top: 150px;
                 left: 100px;
                 width: 500px; */
+               
                 width: 50%;
                 height: 70%;
-                
                 display: flex;
+                /* border: 5px solid rgb(163, 71, 17);
+                border-radius: 25px; */
             }
             #rightSide {
                
                 /* left: 700px;  */
                 left: 50%;
-                border-left: 1px solid;
+                border-left: 1px solid rgb(163, 71, 17);
                 margin-right: 10px;
+               
             }
             /* #buttons{
                 position: absolute;
@@ -81,9 +85,9 @@
             #level,#startButton{
                 position: absolute;
                 left: 100px;
-                background-color: rgba(200, 59, 7, 0.954);
+                background-color: rgba(220, 68, 13, 0.954);
                 color: cornsilk;
-                width: 150px;
+                width: 100px;
                 height: 50px;
                 border-radius: 15px;
                 font-size: 20px;
@@ -137,14 +141,31 @@
 }
         </style>
     </head>
+
+    <!-- Take a look at the code . But since I'm redoing the code to make the game more fun it might look a bit unformatted with lots of codes commented out.   -->
+
     <body onload="selectLevel()">  
+        <!-- Audio -->
+        <audio id="gamemusic">
+            <source src="gamemusic.mp3" type="audio/mp3">
+            
+          Your browser does not support the audio element.
+        </audio>
+
+        <audio id="gameovermusic">
+            <source src="gameover.mp3" type="audio/mp3">
+            
+          Your browser does not support the audio element.
+        </audio>
+
+
         <div id="topBanner">
         
             <h1>Pick a Leaf</h1>
             
             
             <div id="buttons">
-                <button id="startButton" onclick="startGame()">Restart Game</button>
+                <button id="startButton" onclick="startGame()">Restart</button>
                 <select id="level" name="level" onChange="selectLevel()">
                     <option value="">Level</option>
                     <option value="3">Easy</option>
@@ -248,6 +269,8 @@
                 leftSideImages.removeChild(leftSideImages.lastChild);
                 
                 theRightSide.appendChild(leftSideImages);
+                
+                document.getElementById("gamemusic").play()
                 // theLeftSide.addEventListener('click',gameOver);
                 // theRightSide.addEventListener('click',gameOver);
                 theLeftSide.addEventListener('click', gameOver);
@@ -275,7 +298,8 @@
             function gameOver() {
                 numTries -=1;
 
-                
+                document.getElementById("gamemusic").pause()
+                document.getElementById("gameovermusic").play()
 
                 // document.getElementById("begin").style.display = "none";
 
@@ -333,6 +357,7 @@
                 document.getElementById("startButton").style.display = "none";
                 document.getElementById("level").style.display = "block";
                 document.getElementById("level").options[0].selected = true;
+                document.getElementById("gamemusic").load()
 
                 generateLeaves();
             }
