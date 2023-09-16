@@ -6,14 +6,12 @@
         <style>
 
             body{
-                /* background-image: url("images2/grass.png"); */
-                background-color: rgb(163, 71, 17);
+                background-color: rgba(243, 60, 5, 0.961);
                 margin: 0px;
-                
             }
             #topBanner{
                 background-image: url("images2/head.png");
-                
+                margin-bottom: 0px;
             }
             h1{
                 color: rgb(106, 244, 106);
@@ -27,7 +25,6 @@
             h2{
                 
                 color: rgba(243, 227, 12, 0.712);
-                /* background-color:rgb(255, 170, 0.5); */
                 font-size: 30px;
                 text-align: center;
                 height: 75px;
@@ -42,46 +39,17 @@
                 
                 background-image: url("images2/grass.png");
                 position: absolute;
-                /*top: 150px;
-                left: 100px;
-                width: 500px; */
-               
                 width: 50%;
                 height: 70%;
                 display: flex;
-                /* border: 5px solid rgb(163, 71, 17);
-                border-radius: 25px; */
             }
             #rightSide {
-               
-                /* left: 700px;  */
                 left: 50%;
                 border-left: 1px solid rgb(163, 71, 17);
                 margin-right: 10px;
                
             }
-            /* #buttons{
-                position: absolute;
-                top: 75px;
-                left: 575px;
-                background-color: orangered;
-                color: lavender;
-                width: 150px;
-                height: 50px;
-                border-radius: 15px;
-                font-size: 20px;
-                
-            } */
-            /* #startButton {
-                display: none;
-                
-            } */
 
-            /* #buttons{
-                position: absolute;
-                top: 10px;
-                left: 100px;
-            } */
             #level,#startButton{
                 position: absolute;
                 left: 100px;
@@ -91,58 +59,54 @@
                 height: 50px;
                 border-radius: 15px;
                 font-size: 20px;
-
-            
             }
+
             #basket{
                 position: absolute;
                 left: 900px;
                 top: 20px;
             }
 
+            .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%; 
+            overflow: auto;
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4);
+            }
 
-            /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; 
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+            .modal-content {
+            border: 5px solid #2d5312d6;
+            background-color: rgb(24, 52, 17);
+            margin: 15% auto;
+                padding: 20px;
+                width: 50%;
+                height: 50%;
+            }
 
-/* Modal Content */
-.modal-content {
- border: 5px solid #2d5312d6;
- background-color: rgb(24, 52, 17);
- margin: 15% auto;
-    padding: 20px;
-    width: 50%;
-    height: 50%;
-}
+            .close {
+            color: #d81313;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            }
 
-/* The Close Button */
-.close {
-  color: #d81313;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
+            .close:hover,
+            .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            }
         </style>
     </head>
 
     <!-- Take a look at the code . But since I'm redoing the code to make the game more fun it might look a bit unformatted with lots of codes commented out.   -->
+
 
     <body onload="selectLevel()">  
         <!-- Audio -->
@@ -158,12 +122,9 @@
           Your browser does not support the audio element.
         </audio>
 
-
+        <!-- Top banner -->
         <div id="topBanner">
-        
-            <h1>Pick a Leaf</h1>
-            
-            
+            <h1>Pick a Leaf</h1>\
             <div id="buttons">
                 <button id="startButton" onclick="startGame()">Restart</button>
                 <select id="level" name="level" onChange="selectLevel()">
@@ -174,53 +135,31 @@
                 </select>
             </div>
             <h2 >Click the extra leaf on the left</h2>
-           
-            <!-- <img src="images2/basket.png" alt="basket" id="basket" width="300px" height="200px"/> -->
-
         </div>
-        <!-- <h2 id="gameDone">Oops! Game Over!</h2> -->
-        
-    
-   
-       
-            <div id="leftSide"></div>
-            <div id="rightSide"></div>
-       
+        <!-- Game Space -->
+        <div id="leftSide"></div>
+        <div id="rightSide"></div>
+        <!-- The Modal -->
+        <div id="gameoverModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Game Over</h1>
+            <div>
+                <h2>Your score is: </h2>
+                <h2 id="score"></h2>
+            </div>
+        </div>
+        </div>
 
-            <!-- Trigger/Open The Modal -->
-<!-- <button id="myBtn">Open Modal</button> -->
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h1>Game Over</h1>
-    <div>
-        <h2>Your score is: </h2>
-        <h2 id="score"></h2>
-        
-    </div>
-    
-  </div>
-
-</div>
-
-
-
-        
+        <!-- Javascript -->
 
         <script>
-             
             let numberOfLeaves = 0;
             let level = 0;
-            
             const theLeftSide = document.getElementById('leftSide'); 
             const theRightSide = document.getElementById('rightSide');
             let numTries = 0;
-            
-                
 
             function selectLevel() {
                 
@@ -231,24 +170,15 @@
                     numberOfLeaves = level;
                     generateLeaves();
                     document.getElementById("level").style.display = "none";
-
-                    document.getElementById("begin").style.display = "block";
-                   
+                    // document.getElementById("begin").style.display = "block";
                 }
             }
 
-
-            
             function generateLeaves() {
-                
-                
 
                 for( i=0 ; i < numberOfLeaves ;i++ ) {
-                    
-
                     const leaves = ["images2/leaf0.png", "images2/leaf1.png", "images2/leaf3.png","images2/leaf5.png", "images2/leaf6.png", "images2/leaf7.png",
                                     "images2/leaf11.png", "images2/leaf12.png"];
-                    
                     
                     let randomleafIdx = Math.floor(Math.random() * 8);
                     const leaf = document.createElement('img');
@@ -258,31 +188,19 @@
                     let randomLeft = Math.floor(Math.random() * 400) + 1;
                     leaf.style.top = randomTop + 'px' ;
                     leaf.style.left = randomLeft + 'px' ;
-                    
                     theLeftSide.appendChild(leaf);
-                    //theRightSide.appendChild(leaf);
-                    
-      
                 }
                 
                 const leftSideImages = theLeftSide.cloneNode(true);
                 leftSideImages.removeChild(leftSideImages.lastChild);
-                
                 theRightSide.appendChild(leftSideImages);
-                
                 document.getElementById("gamemusic").play()
-                // theLeftSide.addEventListener('click',gameOver);
-                // theRightSide.addEventListener('click',gameOver);
                 theLeftSide.addEventListener('click', gameOver);
                 theLeftSide.lastChild.addEventListener('click',nextLevel);
-                numTries++ ;   
-                
-                
+                numTries++ ; 
             }
 
             function nextLevel() {
-                
-
                 event.stopPropagation();
                 
                 while (theLeftSide.firstChild){
@@ -301,40 +219,15 @@
                 document.getElementById("gamemusic").pause()
                 document.getElementById("gameovermusic").play()
 
-                // document.getElementById("begin").style.display = "none";
-
-                 // Get the modal
-                let modal = document.getElementById("myModal");
-
-                // Get the button that opens the modal
-                // let btn = document.getElementById("myBtn");
-
-                // Get the <span> element that closes the modal
+                let modal = document.getElementById("gameoverModal");
                 let span = document.getElementsByClassName("close")[0];
-
-                // When the user clicks the button, open the modal 
-                // btn.onclick = modaldisplay() {
                 modal.style.display = "block";
-                // }
-                // document.getElementById("startButton").style.display = "block";
-
-                // When the user clicks on <span> (x), close the modal
-
-                    
-
-                   
-                    
                 span.onclick = function() {
                 modal.style.display = "none";
-                
-               
                 }  
 
                 let score = numTries * 10
-
                 document.getElementById('score').innerText = score
-                //alert('Game Over!\n\n You got it right ' + numTries + ' times!');
-                
                 theLeftSide.lastChild.removeEventListener('click',nextLevel);
                 while (theLeftSide.firstChild){
                     theLeftSide.removeChild(theLeftSide.firstChild);
@@ -344,27 +237,17 @@
                 }
                 document.getElementById("startButton").style.display = "block";
                 document.body.removeEventListener('click',gameOver);
-                
-               
-
             }
 
             function startGame() {
-                
                 numberOfLeaves = 0;
                 numTries = 0;
-
                 document.getElementById("startButton").style.display = "none";
                 document.getElementById("level").style.display = "block";
                 document.getElementById("level").options[0].selected = true;
                 document.getElementById("gamemusic").load()
-
                 generateLeaves();
             }
-
-           
-
-
 
         </script>
 
