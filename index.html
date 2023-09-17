@@ -6,8 +6,9 @@
         <style>
 
             body{
-                background-color: rgba(243, 60, 5, 0.961);
+                background-color: rgba(8, 45, 7, 0.961);
                 margin: 0px;
+                overflow: hidden;
             }
             #topBanner{
                 background-image: url("images2/head.png");
@@ -15,11 +16,10 @@
             }
             h1{
                 color: rgb(106, 244, 106);
-               
                 text-align: center;
                 font-size: 50px;
                 margin-top: 0%;
-                padding-top: 0%;
+                padding-top: 20px;
                 height: 100px;
             }
             h2{
@@ -45,7 +45,7 @@
             }
             #rightSide {
                 left: 50%;
-                border-left: 1px solid rgb(163, 71, 17);
+                border-left: 5px solid rgba(57, 19, 5, 0.961);
                 margin-right: 10px;
                
             }
@@ -59,12 +59,6 @@
                 height: 50px;
                 border-radius: 15px;
                 font-size: 20px;
-            }
-
-            #basket{
-                position: absolute;
-                left: 900px;
-                top: 20px;
             }
 
             .modal {
@@ -108,7 +102,7 @@
     <!-- Take a look at the code . But since I'm redoing the code to make the game more fun it might look a bit unformatted with lots of codes commented out.   -->
 
 
-    <body onload="selectLevel()">  
+    <body onload="startGame()">  
         <!-- Audio -->
         <audio id="gamemusic">
             <source src="gamemusic.mp3" type="audio/mp3">
@@ -124,7 +118,7 @@
 
         <!-- Top banner -->
         <div id="topBanner">
-            <h1>Pick a Leaf</h1>\
+            <h1>Pick a Leaf</h1>
             <div id="buttons">
                 <button id="startButton" onclick="startGame()">Restart</button>
                 <select id="level" name="level" onChange="selectLevel()">
@@ -184,8 +178,8 @@
                     const leaf = document.createElement('img');
                     leaf.src = leaves[randomleafIdx];
                     
-                    let randomTop = Math.floor(Math.random() * 400)  + 1;
-                    let randomLeft = Math.floor(Math.random() * 400) + 1;
+                    let randomTop = Math.floor(Math.random() * 300)  + 1;
+                    let randomLeft = Math.floor(Math.random() * 500) + 1;
                     leaf.style.top = randomTop + 'px' ;
                     leaf.style.left = randomLeft + 'px' ;
                     theLeftSide.appendChild(leaf);
