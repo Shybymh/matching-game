@@ -43,10 +43,11 @@
                 height: 70%;
                 display: flex;
             }
+            
             #rightSide {
                 left: 50%;
                 border-left: 5px solid rgba(57, 19, 5, 0.961);
-                margin-right: 10px;
+                margin-right: 5px;
                
             }
 
@@ -99,8 +100,7 @@
         </style>
     </head>
 
-    <!-- Take a look at the code . But since I'm redoing the code to make the game more fun it might look a bit unformatted with lots of codes commented out.   -->
-
+    
 
     <body onload="startGame()">  
         <!-- Audio -->
@@ -171,7 +171,7 @@
             function generateLeaves() {
 
                 for( i=0 ; i < numberOfLeaves ;i++ ) {
-                    const leaves = ["images2/leaf0.png", "images2/leaf1.png", "images2/leaf3.png","images2/leaf5.png", "images2/leaf6.png", "images2/leaf7.png",
+                    const leaves = ["images2/leaf0.png", "images2/leaf1.png", "images2/leaf3.png","images2/leaf5.png", "images2/leaf6.png", "images2/leaf7.png", "images2/leaf8.png",
                                     "images2/leaf11.png", "images2/leaf12.png"];
                     
                     let randomleafIdx = Math.floor(Math.random() * 8);
