@@ -4,15 +4,17 @@
         <meta charset="utf-8"/>
         <title>Pick the extra Leaf</title>
         <style>
-
+           
             body{
                 background-color: rgba(8, 45, 7, 0.961);
                 margin: 0px;
                 overflow: hidden;
+                
             }
             #topBanner{
                 background-image: url("images2/head.png");
                 margin-bottom: 0px;
+                
             }
             h1{
                 color: rgb(106, 244, 106);
@@ -23,7 +25,6 @@
                 height: 100px;
             }
             h2{
-                
                 color: rgba(243, 227, 12, 0.712);
                 font-size: 30px;
                 text-align: center;
@@ -37,13 +38,13 @@
             
             #leftSide,#rightSide{
                 
-                background-image: url("images2/grass.png");
+                background-image: url("images2/grasscopy.png");
                 position: absolute;
                 width: 50%;
                 height: 70%;
                 display: flex;
             }
-            
+
             #rightSide {
                 left: 50%;
                 border-left: 5px solid rgba(57, 19, 5, 0.961);
@@ -58,6 +59,7 @@
                 color: cornsilk;
                 width: 100px;
                 height: 50px;
+                
                 border-radius: 15px;
                 font-size: 20px;
             }
@@ -131,8 +133,10 @@
             <h2 >Click the extra leaf on the left</h2>
         </div>
         <!-- Game Space -->
+        <div id="gameSpace">
         <div id="leftSide"></div>
         <div id="rightSide"></div>
+        </div>
         <!-- The Modal -->
         <div id="gameoverModal" class="modal">
         <!-- Modal content -->
