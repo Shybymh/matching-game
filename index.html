@@ -13,37 +13,48 @@
             }
             #topBanner{
                 background-image: url("images2/head.png");
-                margin-bottom: 0px;
+                box-sizing: border-box;
+                margin: 10px;
                 
             }
             h1{
                 color: rgb(106, 244, 106);
                 text-align: center;
                 font-size: 50px;
-                margin-top: 0%;
-                padding-top: 20px;
+                margin:0 auto ;
+                /* padding-top: 20px; */
                 height: 100px;
+                
             }
             h2{
-                color: rgba(243, 227, 12, 0.712);
+                color: yellow;
                 font-size: 30px;
                 text-align: center;
                 height: 75px;
-                margin-bottom: 0px;
+               margin: 0 auto;;
             }
+
+            h3 {
+                color:rgb(78, 248, 11);
+                text-align: center;
+                margin: 0 auto;
+            }
+
            
             img {
                 position: absolute;
             }
             
-            #leftSide,#rightSide{
-                
+
+            #leftSide,#rightSide {
                 background-image: url("images2/grasscopy.png");
                 position: absolute;
                 width: 50%;
                 height: 70%;
                 display: flex;
+                border-radius: 20px;
             }
+
 
             #rightSide {
                 left: 50%;
@@ -52,6 +63,8 @@
                
             }
 
+           
+
             #level,#startButton{
                 position: absolute;
                 left: 100px;
@@ -59,7 +72,6 @@
                 color: cornsilk;
                 width: 100px;
                 height: 50px;
-                
                 border-radius: 15px;
                 font-size: 20px;
             }
@@ -121,6 +133,7 @@
         <!-- Top banner -->
         <div id="topBanner">
             <h1>Pick a Leaf</h1>
+            
             <div id="buttons">
                 <button id="startButton" onclick="startGame()">Restart</button>
                 <select id="level" name="level" onChange="selectLevel()">
@@ -130,7 +143,8 @@
                     <option value="8">Difficult</option>
                 </select>
             </div>
-            <h2 >Click the extra leaf on the left</h2>
+            <h2 >Click the extra leaf on the left </h2>
+            <h3>Play in full screen</h3>
         </div>
         <!-- Game Space -->
         <div id="gameSpace">
